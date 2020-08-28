@@ -1,0 +1,32 @@
+FROM continuumio/miniconda:4.7.12
+MAINTAINER xuefei <710681482@qq.com>
+WORKDIR /GISTIC
+
+
+RUN mkdir -p GISTIC
+
+RUN apt-get update
+RUN apt-get install -y zip
+RUN apt-get install -y build-essential
+RUN apt-get install -y libxt6 libxmu6
+
+# install gistic2 soft
+COPY GISTIC_2_0_23.tar.gz /
+COPY install_GISTIC2.sh /
+RUN tar -zxvf /GISTIC_2_0_23.tar.gz 
+# RUN rm -f /GISTIC/GISTIC_2_0_23.tar.gz
+RUN cd /GISTIC/MCR_Installer && unzip MCRInstaller.zip
+RUN /GISTIC/MCR_Installer/install -mode silent -agreeToLicense yes -destinationFolder /GISTIC/MATLAB_Compiler_Runtime
+# RUN chmod u+x /install_GISTIC2.sh && /install_GISTIC2.sh /GISTIC/GISTIC_2_0_23.tar.gz /GISTIC && rm /GISTIC_2_0_23.tar.gz
+
+
+# script & database
+COPY data.zip /GISTIC
+RUN cd /GISTIC && unzip data.zip && mv /GISTIC/data/run_gistic.sh /GISTIC
+RUN rm -f /GISTIC/data.zip
+
+# Rscrip
+RUN conda install -y r-base=3.6.1
+
+# Python
+RUN pip install HTSeq  -i https://pypi.tuna.tsinghua.edu.cn/simple
