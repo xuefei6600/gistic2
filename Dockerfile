@@ -1,7 +1,7 @@
 FROM debian:latest
 MAINTAINER xuefei <710681482@qq.com>
 RUN apt-get update --fix-missing
-RUN apt-get install -qq -y zip
+RUN apt-get install -qq -y zip wget
 RUN apt-get install -y build-essential
 RUN apt-get install -y libxt6 libxmu6
 ## GISTIC install
@@ -19,7 +19,7 @@ RUN mv /GISTIC/data/run_gistic.sh /GISTIC
 RUN mv /GISTIC/data/gistic_cnv.py /usr/bin
 RUN rm -f /GISTIC/data.zip
 ## miniconda2 install
-COPY Miniconda2-latest-Linux-x86_64.sh /
+RUN wget -c https://repo.anaconda.com/miniconda/Miniconda2-latest-Linux-x86_64.sh
 RUN /bin/bash /Miniconda2-latest-Linux-x86_64.sh -b -p /miniconda2
 RUN /miniconda2/bin/conda install -y python=2.7 r-base=3.6
 RUN /miniconda2/bin/pip install HTSeq  -i https://pypi.tuna.tsinghua.edu.cn/simple
@@ -29,5 +29,5 @@ RUN rm -f /Miniconda2-latest-Linux-x86_64.sh
 RUN apt-get -qq -y remove zip
 # RUN apt-get -qq -y autoremove
 # RUN apt-get autoclean
-RUN apt-get clean && \
+RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/*
