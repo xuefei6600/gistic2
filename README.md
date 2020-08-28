@@ -1,12 +1,7 @@
-##  gistic2
-Since the Gistic software installation package is slow to download and requires some library files that are not easy to find, I plan to use Docker Images to work easily.
-
-----
-## HOW to use my gistic2 docker images
-
-`just run linux command line : docker pull xuefei6630/gistic2`
-
-----
+##  GISTIC2
+>Since the Gistic software installation package is slow to download and requires some library files that are not easy to find, I plan to use Docker Images to work easily.
+## How to use my gistic2 docker images
+just run linux command line : `docker pull xuefei6630/gistic2`
 ## Dockerfile
 
 ```Dockerfile
