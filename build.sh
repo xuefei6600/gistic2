@@ -1,1 +1,1 @@
-docker build -t xuefei6630/gistic2:v2_0_23 .
+docker build -t xuefei6630/gistic2:2_0_23_v2 .
